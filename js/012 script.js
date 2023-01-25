@@ -42,3 +42,23 @@ personalMovieDB.movies[a] = b;
 personalMovieDB.movies[c] = d;
 
 console.log(personalMovieDB);
+
+// while () {
+//
+// }
+//
+// do {
+//
+// } while ()
+//
+// for (let i = 0; i < ; i++) {
+//
+// }
+//
+// for (const aElement of a) {
+//
+// }
+//
+// for (const aKey in a) {
+//
+// }
