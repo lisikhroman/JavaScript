@@ -40,3 +40,7 @@ btn.addEventListener('click', myAnimation);
 //     console.log('yello');
 //     id = setTimeout(log, 500);
 // }, 500)
+
+// const now = new Date('2022-05-01');
+const now = new Date();
+console.log(now.getTime());
