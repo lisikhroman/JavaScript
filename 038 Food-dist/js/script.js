@@ -94,4 +94,165 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     setClock('.timer', deadline);
+
+    //Modal
+
+    const modalTriggers = document.querySelectorAll('[data-modal]'),
+        modal = document.querySelector('.modal'),
+        modalCloseBtn = document.querySelector('[data-close]');
+
+    function openModal() {
+        // modal.classList.add('show');
+        // modal.classList.remove('hide');
+        modal.classList.toggle('show');
+        document.body.style.overflow = 'hidden';
+        clearInterval(modalTimerId);
+    }
+
+    function closeModal() {
+        modal.classList.toggle('show');
+        document.body.style.overflow = '';
+    }
+
+    modalTriggers.forEach(btn => {
+        btn.addEventListener('click', openModal)
+    });
+
+    modalCloseBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.code === "Escape" && modal.classList.contains('show')) {
+            closeModal();
+        }
+    });
+
+    const modalTimerId = setTimeout(openModal, 5000);
+
+    function showModalByScroll() {
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+            openModal();
+            window.removeEventListener('scroll', showModalByScroll);
+        }
+    }
+
+    window.addEventListener('scroll', showModalByScroll);
+
+    //Function constructor
+    // function User(name, id) {
+    //     this.name = name;
+    //     this.id = id;
+    //     this.human = true;
+    //     this.hello = function () {
+    //         console.log(`Hello ${this.name}`)
+    //     }
+    // }
+    //
+    // const ivan = new User('Ivan', 28),
+    //     alex = new User('Alex', 29)
+    //
+    // console.log(ivan);
+    // console.log(alex);
+    //
+    // ivan.hello();
+    //
+    // User.prototype.exit = function (name) {
+    //     console.log(`Пользователь ${this.name} вышел`)
+    // }
+    //
+    // ivan.exit();
+
+
+    //Контрекст вызова. This
+
+    // function showThis(a, b) {
+    //     console.log(this);
+    //     function sum() {
+    //         console.log(this);
+    //         return a + b;
+    //     }
+    //
+    //     console.log(sum());
+    // }
+    //
+    // showThis(4, 5);
+    //
+    // const obj = {
+    //     a: 20,
+    //     b: 15,
+    //     sum: function () {
+    //         console.log(this)
+    //         function shout() {
+    //             console.log(this)
+    //         }
+    //         shout();
+    //     }
+    // }
+    //
+    // obj.sum();
+
+
+    // function User(name, id) {
+    //     this.name = name;
+    //     this.id = id;
+    //     this.human = true;
+    //     this.hello = function () {
+    //         console.log(`Hello ${this.name}`)
+    //     }
+    // }
+    //
+    // let ivan = new User('Ivan', 28)
+
+    // function sayName(surname) {
+    //     console.log(this);
+    //     console.log(this.name + surname);
+    // }
+    //
+    // const user = {
+    //     name: 'John'
+    // };
+    //
+    // sayName.call(user, 'Smith');
+    // sayName.apply(user, ['Smith']);
+    //
+    // function count(num) {
+    //     return this*num;
+    // }
+    //
+    // const double = count.bind(2);
+    // console.log(double(3))
+    // console.log(double(13))
+
+    // const btn = document.querySelector('button');
+    //
+    // btn.addEventListener('click', (e) => {
+    //     e.target.style.backgroundColor = 'red'
+    // })
+    //
+    // const obj = {
+    //     num: 5,
+    //     sayNumber: function () {
+    //         const say = () => {
+    //             console.log(this.num);
+    //         }
+    //
+    //         say();
+    //     }
+    // }
+    //
+    // obj.sayNumber();
+    //
+    // const double = a => a * 2;
+    //
+    // console.log(double(4))
+
+    //1) Обычная функция: this = window, но если стоит use strict, то undefined
+    //2) Контекст у методов объекта - сам объект
+    //3) this в конструкторах и классах - это новый экземпляр объекта
+    //4) Ручная привязка this: call, apply, bind.
 });
